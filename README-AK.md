@@ -30,7 +30,7 @@ Import do repo · Framework Preset **Other** · Root Directory na raiz · sem Bu
 Renderiza, sem requisições a CDN (só o Pixel da Meta), UTMs/`src`/`sck` chegam ao checkout, mobile 375 px sem rolagem horizontal, desktop 1440 px ok.
 
 ## Pendências
-- [ ] URL real: trocar `SEU-DOMINIO.com.br` (canonical, og:url, og:image, twitter:image) após definir o domínio/Vercel e fazer segundo commit
+- [x] URL real https://imersao.winfinito.com/ aplicada em canonical, og:url, og:image e twitter:image (CNAME na GoDaddy → Vercel)
 - [ ] ID do GTM (não há tag no export): 1ª coisa do `<head>` + `<noscript>` após `<body>`; se o GTM disparar o Pixel, remover o do HTML para não duplicar
 - [ ] `robots.txt` hoje `Allow: /`; se for só tráfego pago, `Disallow: /` + `noindex` [DECIDIR]
 
