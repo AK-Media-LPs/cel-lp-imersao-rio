@@ -11,14 +11,15 @@ HTML + runtime do Claude Design (`support.js`, não editar). React 18.3.1, React
 Import do repo · Framework Preset **Other** · Root Directory na raiz · sem Build/Install Command, sem Output Directory.
 
 ## Regras de negócio embutidas no código (`index.html`)
-- 1º lote R$197 até 06/12/2026 23:59 (-03:00); 2º lote R$247 até 10/12/2026 23:59; depois "Inscrições encerradas" (`L1_END`, `L2_END`). O contador e o preço trocam sozinhos pela data.
-- O link de checkout é o mesmo nos dois lotes (`rawUrl`, em `renderVals`): **a troca de preço precisa estar configurada na oferta do Hotmart**.
+- **Lote único R$197**, com inscrições até 10/12/2026 23:59 (-03:00) ou até esgotar (`L_END`, no script). O contador regressivo roda até essa data; depois aparece "Inscrições encerradas".
+- O link de checkout (`rawUrl`, em `renderVals`) é a oferta "Lote 01 · R$197,00" do Hotmart (conferido em 18/11/2026). Se o preço mudar, alterar o Hotmart **e** o código (`price`, texto da faixa e do card).
 - Contador de vagas ("Restam X de 30") só aparece se `vagasRestantes` > 0 (hoje 0 = oculto).
 
 ## Edições sobre o exportado
 - Exportado como bundle autônomo `.html` do Claude Design; desempacotado em `index.html` + `assets/` + `support.js` + `vendor/`.
 - `<head>` estático com título, description, canonical, Open Graph, Twitter e favicon; GSAP e React servidos de `vendor/` (sem CDN), com `defer` antes do `support.js`.
 - Imagens otimizadas (de ~4,5 MB para ~0,75 MB, JPEG); `assets/og-image.jpg` (1200×630) gerado a partir da foto do hero, pois o `og-cel.png` citado no export não vinha no bundle.
+- 18/11/2026: página convertida de 2 lotes (R$197 até 06/12 / R$247 até 10/12) para **lote único R$197**; faixa do topo, seção "Ingressos" (1 card), textos e lógica de datas ajustados.
 - Removido o link "Não carregou? Assistir no YouTube" abaixo dos vídeos de depoimento.
 - Meta Pixel (ID 426921048860579, PageView) no `<head>` estático, direto no HTML (não via GTM).
 - Ajustes mobile (<=767px): bloco `<style>` no `<head>` centraliza os blocos com título e aumenta a área de toque do link do mapa. Listas, agenda, FAQ, ingressos e dados Data/Horário/Local ficam à esquerda.
@@ -31,7 +32,6 @@ Renderiza, sem requisições a CDN (só o Pixel da Meta), UTMs/`src`/`sck` chega
 ## Pendências
 - [ ] URL real: trocar `SEU-DOMINIO.com.br` (canonical, og:url, og:image, twitter:image) após definir o domínio/Vercel e fazer segundo commit
 - [ ] ID do GTM (não há tag no export): 1ª coisa do `<head>` + `<noscript>` após `<body>`; se o GTM disparar o Pixel, remover o do HTML para não duplicar
-- [ ] Confirmar no Hotmart que a oferta troca de R$197 para R$247 em 07/12
 - [ ] `robots.txt` hoje `Allow: /`; se for só tráfego pago, `Disallow: /` + `noindex` [DECIDIR]
 
-Última atualização: 17/11/2026
+Última atualização: 18/11/2026

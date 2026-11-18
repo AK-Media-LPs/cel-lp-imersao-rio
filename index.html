@@ -84,12 +84,8 @@ p,h1,h2,h3{margin:0}
 <!-- FAIXA DE LOTE -->
 <div data-screen-label="00 Faixa lote" style="background:#003bff;color:#ffffff;padding:10px 16px">
   <div style="max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 16px;text-align:center;font-size:14px;line-height:1.4">
-    <sc-if value="{{ isL1 }}" hint-placeholder-val="{{ true }}">
-      <span><strong>1º lote: R$197</strong> · sobe para R$247 em</span>
-      <span style="font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.02em;padding:2px 10px;background:rgba(255,255,255,.16);border-radius:4px">{{ countdown }}</span>
-    </sc-if>
-    <sc-if value="{{ isL2 }}" hint-placeholder-val="{{ false }}">
-      <span><strong>2º lote: R$247</strong> · inscrições encerram em</span>
+    <sc-if value="{{ isOpen }}" hint-placeholder-val="{{ true }}">
+      <span><strong>Lote único: R$197</strong> · inscrições encerram em</span>
       <span style="font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.02em;padding:2px 10px;background:rgba(255,255,255,.16);border-radius:4px">{{ countdown }}</span>
     </sc-if>
     <sc-if value="{{ isClosed }}" hint-placeholder-val="{{ false }}">
@@ -167,7 +163,7 @@ p,h1,h2,h3{margin:0}
     </div>
     <sc-if value="{{ qFit }}" hint-placeholder-val="{{ false }}">
       <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 24px;padding:20px 22px;background:#e9eefc;border-radius:10px">
-        <p style="flex:1 1 300px;font-size:17px;text-wrap:pretty"><strong>Você está no perfil da turma.</strong> Garanta sua cadeira enquanto o lote atual está aberto.</p>
+        <p style="flex:1 1 300px;font-size:17px;text-wrap:pretty"><strong>Você está no perfil da turma.</strong> Garanta sua cadeira enquanto as inscrições estão abertas.</p>
         <a href="{{ checkoutUrl }}" style="flex:0 1 auto;display:flex;align-items:center;justify-content:center;min-height:52px;padding:14px 22px;background:#003bff;color:#ffffff;font:700 15px/1.3 Roboto,sans-serif;border-radius:6px;text-decoration:none" style-hover="background:#0030d6">{{ ctaLabel }}</a>
       </div>
     </sc-if>
@@ -319,24 +315,16 @@ p,h1,h2,h3{margin:0}
   <div style="max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:36px">
     <div style="display:flex;flex-direction:column;gap:8px;text-align:center;align-items:center">
       <span style="font-size:15px;color:#7a8095">Ingressos</span>
-      <h2 style="font-weight:700;font-size:clamp(34px,5vw,52px);line-height:1.08;letter-spacing:-.035em">Só 30 cadeiras. <span style="color:#8a90a3">Dois lotes.</span></h2>
+      <h2 style="font-weight:700;font-size:clamp(34px,5vw,52px);line-height:1.08;letter-spacing:-.035em">Só 30 cadeiras. <span style="color:#8a90a3">Lote único.</span></h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+    <div style="display:grid;grid-template-columns:minmax(0,420px);justify-content:center;gap:16px">
       <div style="display:flex;flex-direction:column;gap:10px;padding:28px;background:#ffffff;border-radius:14px;border:2px solid {{ l1Border }};opacity:{{ l1Op }}">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
-          <span style="font-weight:700;font-size:13px;letter-spacing:.12em;color:#3d4357">1º LOTE</span>
+          <span style="font-weight:700;font-size:13px;letter-spacing:.12em;color:#3d4357">LOTE ÚNICO</span>
           <span style="font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;background:{{ l1BadgeBg }};color:{{ l1BadgeColor }}">{{ l1Badge }}</span>
         </div>
         <span style="font-weight:700;font-size:clamp(48px,7vw,64px);line-height:1;letter-spacing:-.04em;color:#151a2b" data-countup="">R$197</span>
-        <span style="font-size:15px;color:#6b7186">Até 6 de dezembro</span>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:10px;padding:28px;background:#ffffff;border-radius:14px;border:2px solid {{ l2Border }};opacity:{{ l2Op }}">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
-          <span style="font-weight:700;font-size:13px;letter-spacing:.12em;color:#3d4357">2º LOTE</span>
-          <span style="font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;background:{{ l2BadgeBg }};color:{{ l2BadgeColor }}">{{ l2Badge }}</span>
-        </div>
-        <span style="font-weight:700;font-size:clamp(48px,7vw,64px);line-height:1;letter-spacing:-.04em;color:#151a2b" data-countup="">R$247</span>
-        <span style="font-size:15px;color:#6b7186">De 7 a 10 de dezembro ou até esgotar</span>
+        <span style="font-size:15px;color:#6b7186">Até 10 de dezembro ou até esgotar</span>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:24px;align-items:stretch">
@@ -434,8 +422,7 @@ p,h1,h2,h3{margin:0}
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script="" data-props="{&quot;headline&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Plano pronto&quot;,&quot;Faturar x lucrar&quot;],&quot;default&quot;:&quot;Plano pronto&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Copy&quot;},&quot;checkoutLote1&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Checkout&quot;},&quot;checkoutLote2&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Checkout&quot;},&quot;celUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://pay.hotmart.com/W94393903V?off=9bv66jk3&amp;bid=1791463181076&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Checkout&quot;},&quot;vagasRestantes&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:0,&quot;max&quot;:30,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Escassez&quot;},&quot;showGuarantee&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Seções&quot;}}">
-const L1_END = Date.parse('2026-12-06T23:59:59-03:00');
-const L2_END = Date.parse('2026-12-10T23:59:59-03:00');
+const L_END = Date.parse('2026-12-10T23:59:59-03:00');
 const DORES = ['Faturo bem, mas no fim do mês não sobra.', 'Se eu sair um dia, a empresa para.', 'Contratei mais gente e o lucro não acompanhou.', 'Não sei quanto posso tirar da empresa sem quebrar o caixa.'];
 const AGENDA = [
   ['8h30', 'Credenciamento e café de boas-vindas', ''],
@@ -547,33 +534,31 @@ class Component extends DCLogic {
   }
   renderVals() {
     const now = this.state.now;
-    const lote = now <= L1_END ? 1 : now <= L2_END ? 2 : 3;
-    const target = lote === 1 ? L1_END : L2_END;
+    const lote = now <= L_END ? 1 : 3;
+    const target = L_END;
     let d = Math.max(0, target - now);
     const dd = Math.floor(d / 864e5); d -= dd * 864e5;
     const hh = Math.floor(d / 36e5); d -= hh * 36e5;
     const mm = Math.floor(d / 6e4); const ss = Math.floor((d - mm * 6e4) / 1e3);
     const p2 = n => String(n).padStart(2, '0');
-    const price = lote === 1 ? '197' : '247';
+    const price = '197';
     const rawUrl = 'https://pay.hotmart.com/R108304679Q?off=j3autz3f&bid=1794927023644';
     const vagas = this.props.vagasRestantes ?? 0;
     const h = this.props.headline ?? 'Plano pronto';
     const on = { border: '#003bff', op: 1, bg: '#003bff', color: '#ffffff' };
     const off = { border: '#dfe2e8', op: .55, bg: '#eef0f4', color: '#6b7186' };
-    const next = { border: '#dfe2e8', op: 1, bg: '#eef0f4', color: '#3d4357' };
-    const c1 = lote === 1 ? on : off, c2 = lote === 2 ? on : lote === 1 ? next : off;
+    const c1 = lote === 1 ? on : off;
     return {
       hA: h !== 'Faturar x lucrar', hB: h === 'Faturar x lucrar',
-      isL1: lote === 1, isL2: lote === 2, isClosed: lote === 3, isOpen: lote < 3,
+      isClosed: lote === 3, isOpen: lote < 3,
       countdown: `${dd}d ${p2(hh)}h ${p2(mm)}m ${p2(ss)}s`,
       showVagas: vagas > 0 && lote < 3, vagas,
       ctaLabel: lote === 3 ? 'Inscrições encerradas' : `Garantir minha cadeira · R$${price}`,
-      loteNote: lote === 1 ? '1º lote até 6/12, depois R$247' : 'Último lote · até 10/12 ou até esgotar',
+      loteNote: 'Lote único · até 10/12 ou até esgotar',
       checkoutUrl: this.withUtms(rawUrl),
       celUrl: this.withUtms(this.props.celUrl || 'https://pay.hotmart.com/W94393903V?off=9bv66jk3&bid=1791463181076'),
       showGuarantee: this.props.showGuarantee ?? true,
       l1Border: c1.border, l1Op: c1.op, l1BadgeBg: c1.bg, l1BadgeColor: c1.color, l1Badge: lote === 1 ? 'Disponível agora' : 'Encerrado',
-      l2Border: c2.border, l2Op: c2.op, l2BadgeBg: c2.bg, l2BadgeColor: c2.color, l2Badge: lote === 2 ? 'Disponível agora' : lote === 1 ? 'Abre em 7/12' : 'Encerrado',
       dores: DORES,
       faixas: FAIXAS.map((label, i) => {
         const sel = this.state.q === i;
